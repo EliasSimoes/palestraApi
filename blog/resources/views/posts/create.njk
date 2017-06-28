@@ -1,0 +1,33 @@
+{% extends 'master' %}
+
+{% block content %}
+    {% if old('errors') %}
+        <div class="alert alert-danger">
+            {% for error in old('errors') %}
+            <li> {{ error.message }} </li>
+            {% endfor %}
+        </div>
+    {% endif %}
+  {{ form.open({action: 'PostsController.store'}) }}
+
+    {{ csrfField }}
+
+    <fieldset class="form-group">
+      {{ form.label('Título') }}
+      {{ form.text('title', null, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Autor') }}
+      {{ form.text('author', null, { class: 'form-control' }) }}
+    </fieldset>
+
+    <fieldset class="form-group">
+      {{ form.label('Sinópse') }}
+      {{ form.textarea('content', null, { class: 'form-control' }) }}
+    </fieldset>
+
+    {{ form.submit('Registrar', 'publish', { class: 'btn btn-primary btn-block' }) }}
+
+  {{ form.close() }}
+{% endblock %}
